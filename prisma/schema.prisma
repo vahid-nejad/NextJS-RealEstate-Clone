@@ -68,7 +68,7 @@ model PropertyFeature {
 
 model PropertyLocation {
   id            Int      @id @default(autoincrement())
-  streedAddress String
+  streetAddress String
   city          String
   state         String
   zip           String

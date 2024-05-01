@@ -14,8 +14,19 @@ const Features = (props: Props) => {
     register,
     formState: { errors },
     control,
+    trigger,
   } = useFormContext<AddPropertyInputType>();
-  const handleNext = () => props.next();
+  const handleNext = async () => {
+    if (
+      await trigger([
+        "propertyFeature.area",
+        "propertyFeature.bathrooms",
+        "propertyFeature.bedrooms",
+        "propertyFeature.parkingSpots",
+      ])
+    )
+      props.next();
+  };
   return (
     <Card className={cn("p-2  grid grid-cols-1 md:grid-cols-2 gap-3", props.className)}>
       <Input
@@ -49,7 +60,7 @@ const Features = (props: Props) => {
           control={control}
           name="propertyFeature.hasSwimmingPool"
           render={({ field }) => (
-            <Checkbox onChange={field.onChange} onBlur={field.onBlur}>
+            <Checkbox onChange={field.onChange} onBlur={field.onBlur} defaultValue={"false"}>
               Has Swimming Pool
             </Checkbox>
           )}
@@ -57,9 +68,9 @@ const Features = (props: Props) => {
 
         <Controller
           control={control}
-          name="propertyFeature.hasSwimmingPool"
+          name="propertyFeature.hasGardenYard"
           render={({ field }) => (
-            <Checkbox onChange={field.onChange} onBlur={field.onBlur}>
+            <Checkbox onChange={field.onChange} onBlur={field.onBlur} defaultValue={"false"}>
               Has Gard/Yard
             </Checkbox>
           )}
@@ -69,7 +80,7 @@ const Features = (props: Props) => {
           control={control}
           name="propertyFeature.hasBalcony"
           render={({ field }) => (
-            <Checkbox onChange={field.onChange} onBlur={field.onBlur}>
+            <Checkbox onChange={field.onChange} onBlur={field.onBlur} defaultValue={"false"}>
               Has Balcony/Patio
             </Checkbox>
           )}

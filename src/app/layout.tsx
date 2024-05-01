@@ -4,6 +4,8 @@ import "./globals.css";
 import { Providers } from "./components/providers";
 import Appbar from "./components/Appbar";
 import SignInPanel from "./components/signInPanel";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,6 +27,7 @@ export default function RootLayout({
             <SignInPanel />
           </Appbar>
           {children}
+          <ToastContainer />
         </Providers>
       </body>
     </html>

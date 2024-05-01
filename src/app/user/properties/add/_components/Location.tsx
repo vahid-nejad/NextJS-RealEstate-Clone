@@ -13,8 +13,20 @@ const Location = (props: Props) => {
   const {
     register,
     formState: { errors },
+    trigger,
   } = useFormContext<AddPropertyInputType>();
-  const handleNext = () => props.next();
+  const handleNext = async () => {
+    if (
+      await trigger([
+        "location.streetAddress",
+        "location.city",
+        "location.state",
+        "location.zip",
+        "location.region",
+      ])
+    )
+      props.next();
+  };
   return (
     <Card className={cn("p-2  grid grid-cols-1 md:grid-cols-2 gap-3", props.className)}>
       <Input
@@ -22,6 +34,7 @@ const Location = (props: Props) => {
         errorMessage={errors.location?.streetAddress?.message}
         isInvalid={!!errors.location?.streetAddress}
         label="Street Address"
+        name="location.streetAddress"
       />
 
       <Input

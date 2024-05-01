@@ -12,6 +12,11 @@ import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import { date, z } from "zod";
 import { AddPropertyFormSchema } from "@/lib/zodSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { uploadImages } from "@/lib/upload";
+import { saveProperty } from "@/lib/actions/property";
+import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
+import { redirect } from "next/navigation";
+import { toast } from "react-toastify";
 
 const steps = [
   {
@@ -45,14 +50,28 @@ const AddPropertyForm = (props: Props) => {
   const [images, setImages] = useState<File[]>([]);
   const [step, setStep] = useState(0);
 
+  const { user } = useKindeBrowserClient();
   const onSubmit: SubmitHandler<AddPropertyInputType> = async (data) => {
     console.log({ data });
+    const imageUrls = await uploadImages(images);
+    console.log({ imageUrls });
+    try {
+      await saveProperty(data, imageUrls, user?.id!);
+      toast.success("Property Added!");
+    } catch (error) {
+      console.error({ error });
+    } finally {
+      redirect("/user/properties");
+    }
   };
   return (
     <div>
       <Stepper className="m-2" items={steps} activeItem={step} setActiveItem={setStep} />
       <FormProvider {...methods}>
-        <form className="mt-3 p-2" onSubmit={methods.handleSubmit(onSubmit)}>
+        <form
+          className="mt-3 p-2"
+          onSubmit={methods.handleSubmit(onSubmit, (errors) => console.log({ errors }))}
+        >
           <Basic
             className={cn({ hidden: step !== 0 })}
             next={() => setStep((prev) => prev + 1)}
