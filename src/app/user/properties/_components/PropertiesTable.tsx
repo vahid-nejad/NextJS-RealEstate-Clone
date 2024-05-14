@@ -22,7 +22,7 @@ type Props = {
       images: true;
       type: true;
     };
-  }>;
+  }>[];
   totalPages: number;
   currentPage: number;
 };

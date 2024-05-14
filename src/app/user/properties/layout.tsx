@@ -1,4 +1,4 @@
-import { Button } from "@nextui-org/react";
+import { Button, modal } from "@nextui-org/react";
 import Link from "next/link";
 import React, { ReactNode } from "react";
 

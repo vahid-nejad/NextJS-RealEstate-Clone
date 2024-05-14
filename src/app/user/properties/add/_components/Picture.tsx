@@ -3,6 +3,7 @@ import { Button, Card, cn } from "@nextui-org/react";
 import React from "react";
 import PictureCard from "./PictureCard";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/16/solid";
+import { PropertyImage } from "@prisma/client";
 
 interface Props {
   next: () => void;
@@ -10,6 +11,8 @@ interface Props {
   className?: string;
   images: File[];
   setImages: (images: File[]) => void;
+  savedImagesUrl?: PropertyImage[];
+  setSavedImageUrl?: (propertyImages: PropertyImage[]) => void;
 }
 
 const Picture = (props: Props) => {
@@ -17,6 +20,22 @@ const Picture = (props: Props) => {
     <Card className={cn("p-3", props.className)}>
       <FileInput onSelect={(e) => props.setImages([(e as any).target.files[0], ...props.images])} />
       <div className="flex gap-3 flex-wrap">
+        {props.savedImagesUrl!! &&
+          props.setSavedImageUrl!! &&
+          props.savedImagesUrl.map((image, index) => {
+            return (
+              <PictureCard
+                key={image.id}
+                src={image.url}
+                index={index}
+                onDelete={(i) =>
+                  props.setSavedImageUrl!! &&
+                  props.setSavedImageUrl(props.savedImagesUrl!.filter((img) => img.id !== image.id))
+                }
+              />
+            );
+          })}
+
         {props.images.map((image, index) => {
           const srcUrl = URL.createObjectURL(image);
           return (

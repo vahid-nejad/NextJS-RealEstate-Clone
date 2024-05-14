@@ -11,5 +11,6 @@
 		"prettier.printWidth": 100,
 		"editor.wordWrap": "on",
 		 "editor.hover.enabled": false,
+		 "editor.fontWeight": "normal"
 	}
 }

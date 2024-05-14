@@ -13,6 +13,7 @@ const Contact = ({ prev, className }: Props) => {
     register,
     formState: { errors },
     control,
+    getValues,
   } = useFormContext<AddPropertyInputType>();
   return (
     <Card className={cn("grid grid-cols-1 md:grid-cols-3 gap-3 p-2", className)}>
@@ -21,6 +22,7 @@ const Contact = ({ prev, className }: Props) => {
         errorMessage={errors.contact?.name?.message}
         isInvalid={!!errors.contact?.name}
         label="Contact Name"
+        defaultValue={getValues("contact.name")}
       />
 
       <Input
@@ -28,6 +30,7 @@ const Contact = ({ prev, className }: Props) => {
         errorMessage={errors.contact?.phone?.message}
         isInvalid={!!errors.contact?.phone}
         label="Phone"
+        defaultValue={getValues("contact.phone")}
       />
 
       <Input
@@ -35,6 +38,7 @@ const Contact = ({ prev, className }: Props) => {
         errorMessage={errors.contact?.email?.message}
         isInvalid={!!errors.contact?.email}
         label="Email"
+        defaultValue={getValues("contact.email")}
       />
       <div className="flex justify-center col-span-3 gap-3">
         <Button

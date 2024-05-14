@@ -14,6 +14,7 @@ const Location = (props: Props) => {
     register,
     formState: { errors },
     trigger,
+    getValues,
   } = useFormContext<AddPropertyInputType>();
   const handleNext = async () => {
     if (
@@ -35,6 +36,7 @@ const Location = (props: Props) => {
         isInvalid={!!errors.location?.streetAddress}
         label="Street Address"
         name="location.streetAddress"
+        defaultValue={getValues().location.streetAddress}
       />
 
       <Input
@@ -42,6 +44,7 @@ const Location = (props: Props) => {
         errorMessage={errors.location?.zip?.message}
         isInvalid={!!errors.location?.zip}
         label="Zip/Postal Code"
+        defaultValue={getValues().location.zip}
       />
 
       <Input
@@ -49,6 +52,7 @@ const Location = (props: Props) => {
         errorMessage={errors.location?.city?.message}
         isInvalid={!!errors.location?.city}
         label="City"
+        defaultValue={getValues().location.city}
       />
 
       <Input
@@ -56,6 +60,7 @@ const Location = (props: Props) => {
         errorMessage={errors.location?.state?.message}
         isInvalid={!!errors.location?.state}
         label="State"
+        defaultValue={getValues().location.state}
       />
 
       <Input
@@ -64,6 +69,7 @@ const Location = (props: Props) => {
         isInvalid={!!errors.location?.region}
         label="Region/Neighborhood"
         className="col-span-2"
+        defaultValue={getValues().location.region}
       />
 
       <Textarea
@@ -72,6 +78,7 @@ const Location = (props: Props) => {
         isInvalid={!!errors.location?.landmark}
         label="Landmarks"
         className="col-span-2"
+        defaultValue={getValues().location.landmark}
       />
       <div className="flex justify-center col-span-2 gap-3">
         <Button
