@@ -42,14 +42,14 @@ model Contact {
   name       String
   phone      String
   email      String
-  property   Property @relation(fields: [propertyId], references: [id])
+  property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
   propertyId Int      @unique
 }
 
 model PropertyImage {
   id         Int      @id @default(autoincrement())
   url        String
-  property   Property @relation(fields: [propertyId], references: [id])
+  property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
   propertyId Int
 }
 
@@ -62,7 +62,7 @@ model PropertyFeature {
   hasSwimmingPool Boolean
   hasGardenYard   Boolean
   hasBalcony      Boolean
-  property        Property @relation(fields: [propertyId], references: [id])
+  property        Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
   propertyId      Int      @unique
 }
 
@@ -75,7 +75,7 @@ model PropertyLocation {
   region        String
   landmark      String
   propertyId    Int      @unique
-  property      Property @relation(fields: [propertyId], references: [id])
+  property      Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
 }
 
 model PropertyType {

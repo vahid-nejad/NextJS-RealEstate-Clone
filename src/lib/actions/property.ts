@@ -3,6 +3,7 @@
 import { AddPropertyInputType } from "@/app/user/properties/add/_components/AddPropertyForm";
 import prisma from "../prisma";
 import { Property } from "@prisma/client";
+import { redirect } from "next/navigation";
 
 export async function saveProperty(
   propertyData: AddPropertyInputType,
@@ -83,5 +84,14 @@ export async function editProperty(
   });
 
   console.log({ result });
+  return result;
+}
+
+export async function deleteProperty(id: number) {
+  const result = await prisma.property.delete({
+    where: {
+      id,
+    },
+  });
   return result;
 }
