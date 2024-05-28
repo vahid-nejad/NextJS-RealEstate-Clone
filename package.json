@@ -22,6 +22,7 @@
     "react-dom": "^18",
     "react-hook-form": "^7.51.0",
     "react-toastify": "^10.0.5",
+    "use-debounce": "^10.0.0",
     "validator": "^13.11.0",
     "zod": "^3.22.4"
   },
