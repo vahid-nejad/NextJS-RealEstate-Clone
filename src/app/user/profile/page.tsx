@@ -3,8 +3,9 @@ import { getUserById } from "@/lib/actions/user";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import React, { ReactNode } from "react";
 import SectionTitle from "./_components/sectionTitle";
-import { Avatar, Card } from "@nextui-org/react";
+import { Avatar, Button, Card } from "@nextui-org/react";
 import UploadAvatar from "./_components/UploadAvatar";
+import Link from "next/link";
 
 const ProfilePage = async () => {
   const { getUser } = await getKindeServerSession();
@@ -29,6 +30,14 @@ const ProfilePage = async () => {
           <Attribute title="Registered On" value={dbUser?.createdAt.toLocaleDateString()} />
           <Attribute title="Properties Posted" value={1} />
         </div>
+      </Card>
+
+      <Card className="m-4 p-4  flex flex-col gap-5">
+        <SectionTitle title="Subscription Details" />
+        {/* ToDO: Put user subscription here */}
+        <Link href={"/user/subscription"}>
+          <Button color="secondary">Purchase Your Subscription</Button>
+        </Link>
       </Card>
     </div>
   );

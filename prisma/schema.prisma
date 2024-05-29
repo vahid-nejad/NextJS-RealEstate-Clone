@@ -89,3 +89,12 @@ model PropertyStatus {
   value    String
   Property Property[]
 }
+
+model SubscriptionPlan {
+  id                    Int    @id @default(autoincrement())
+  name                  String
+  price                 Float
+  propertyLimit         Int
+  imagePerPropertyLimit Int
+  features              String
+}
