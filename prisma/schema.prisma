@@ -11,13 +11,14 @@ datasource db {
 }
 
 model User {
-  id        String     @id
-  firstName String
-  lastName  String
-  email     String
-  avatarUrl String?
-  createdAt DateTime   @default(now())
-  Property  Property[]
+  id            String          @id
+  firstName     String
+  lastName      String
+  email         String
+  avatarUrl     String?
+  createdAt     DateTime        @default(now())
+  Property      Property[]
+  subscriptions Subscriptions[]
 }
 
 model Property {
@@ -91,10 +92,22 @@ model PropertyStatus {
 }
 
 model SubscriptionPlan {
-  id                    Int    @id @default(autoincrement())
+  id                    Int             @id @default(autoincrement())
   name                  String
   price                 Float
   propertyLimit         Int
   imagePerPropertyLimit Int
   features              String
+  subscriptions         Subscriptions[]
+}
+
+model Subscriptions {
+  id        Int              @id @default(autoincrement())
+  paymentID String
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+  plan      SubscriptionPlan @relation(fields: [palnId], references: [id])
+  palnId    Int
+  userId    String
+  user      User             @relation(fields: [userId], references: [id])
 }
